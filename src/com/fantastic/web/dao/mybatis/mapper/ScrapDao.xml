@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fantastic.web.dao.ScrapDao">
+	<select id="getScrap" resultType="com.fantastic.web.vo.Scrap">
+		SELECT * FROM Scrap Where ${field} = #{query}
+	</select>
+	
+	<insert id="addScrap" parameterType="com.fantastic.web.vo.Scrap">
+		INSERT INTO Scrap(MemberId, TravelCode, ScrapDate) VALUES(#{memberId}, #{travelCode}, #{scrapDate})
+	</insert>
+	
+	<delete id="removeScrap" parameterType="string">
+		DELETE Scrap where MemberId = #{memberId} and TravelCode = #{travelCode}
+	</delete>
+	
+</mapper>

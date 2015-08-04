@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+   
+<mapper namespace="com.fantastic.web.dao.TravelDiaryDao">
+
+	<select id="getTravelDiary" parameterType="string"
+		resultType="com.fantastic.web.vo.TravelDiary">
+		SELECT * FROM TravelDiary
+	</select>
+
+	<update id="addTravelDiary" parameterType="com.fantastic.web.vo.TravelDiary">
+		<selectKey keyProperty="code" order="BEFORE" resultType="string">
+			select isnull (max(cast(Code as int)),0)+1 code from TravelDiary
+		</selectKey>
+
+		INSERT INTO TravelDiary(Code, MemberID, Title, Feeling, TotalCost, Period, Memo, Share)
+		VALUES(#{code}, #{id}, #{title}, #{feeling}, #{totalCost}, #{period}, #{memo}, ${share})
+	</update>
+
+	<delete id="removeTravelDiary" parameterType="string">
+		DELETE TravelDiary WHERE Code = #{code}
+	</delete>
+
+
+</mapper>
